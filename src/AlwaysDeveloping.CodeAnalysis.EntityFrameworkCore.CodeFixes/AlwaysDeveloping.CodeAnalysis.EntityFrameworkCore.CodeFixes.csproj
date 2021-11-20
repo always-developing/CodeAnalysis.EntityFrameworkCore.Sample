@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <RootNamespace>AlwaysDeveloping.CodeAnalysis.EntityFrameworkCore</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AlwaysDeveloping.CodeAnalysis.EntityFrameworkCore\AlwaysDeveloping.CodeAnalysis.EntityFrameworkCore.csproj" />
+  </ItemGroup>
+
+</Project>
