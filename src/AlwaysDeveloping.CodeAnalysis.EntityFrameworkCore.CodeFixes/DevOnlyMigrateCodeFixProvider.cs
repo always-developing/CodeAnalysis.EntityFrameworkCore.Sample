@@ -12,7 +12,8 @@ using System.Threading.Tasks;
 
 namespace AlwaysDeveloping.CodeAnalysis.EntityFrameworkCore
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(DevOnlyMigrateCodeFixProvider)), Shared]
+    [ExportCodeFixProvider(LanguageNames.CSharp, 
+        Name = nameof(DevOnlyMigrateCodeFixProvider)), Shared]
     public class DevOnlyMigrateCodeFixProvider : CodeFixProvider
     {
         public sealed override ImmutableArray<string> FixableDiagnosticIds

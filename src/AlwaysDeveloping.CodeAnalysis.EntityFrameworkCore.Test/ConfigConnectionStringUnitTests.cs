@@ -61,11 +61,11 @@ namespace AlwaysDeveloping.CodeAnalysis.EntityFrameworkCore.Test
             var directiveCheck = "";
 
             string sourceCode = GenerateSourceCode(directiveCheck);
-            var analyzerTest = GenerateAnalyzerTest(sourceCode, buildConfig, true, "{\"ConnectionStrings\": { \"DatabaseSample\": \"Data Source=LocalDatabase.db\" }}");
+            var analyzerFix = GenerateAnalyzerTest(sourceCode, buildConfig, true, "{\"ConnectionStrings\": { \"DatabaseSample\": \"Data Source=LocalDatabase.db\" }}");
 
-            analyzerTest.ExpectedDiagnostics.Add(new DiagnosticResult("ADEF003", Microsoft.CodeAnalysis.DiagnosticSeverity.Error).WithLocation(14, 63));
+            analyzerFix.ExpectedDiagnostics.Add(new DiagnosticResult("ADEF003", Microsoft.CodeAnalysis.DiagnosticSeverity.Error).WithLocation(14, 63));
 
-            await analyzerTest.RunAsync();
+            await analyzerFix.RunAsync();
         }
 
         private static CSharpAnalyzerTest<ConfigConnectionStringAnalyzer, MSTestVerifier> GenerateAnalyzerTest(string sourceCode, string buildConfig, bool addAppSettings = true, string appsettingContent = "", List<DiagnosticResult> expectedResults = null)

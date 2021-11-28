@@ -13,7 +13,7 @@ namespace AlwaysDeveloping.CodeAnalysis.EntityFrameworkCore
 
         private static readonly string Title = "Release build auto-migration";
         private static readonly string MessageFormat = "It is recommended to only run auto-migrations in development environments";
-        private static readonly string Description = "It is recommended to only run auto-migrations in development environments";
+        private static readonly string Description = "Best practice is to only run auto-migrations in development environments and not in test or production environments - this should be done by a CI/CD pipeline.";
         private const string Category = "Usage";
 
         private static readonly DiagnosticDescriptor rule001 = new DiagnosticDescriptor(DiagnosticId, Title, MessageFormat, Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, description: Description);

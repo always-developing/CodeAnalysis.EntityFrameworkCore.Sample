@@ -115,11 +115,11 @@ namespace AlwaysDeveloping.CodeAnalysis.EntityFrameworkCore.Test
 
             string sourceCode = GenerateSourceCode(directiveCheck);
             string resultCode = GenerateSourceCode("DEBUG");
-            var analyzerTest = GenerateFixVerifierTest(sourceCode, resultCode, buildConfig);
+            var analyzerFix = GenerateFixVerifierTest(sourceCode, resultCode, buildConfig);
 
-            analyzerTest.ExpectedDiagnostics.Add(new DiagnosticResult("ADEF001", Microsoft.CodeAnalysis.DiagnosticSeverity.Warning).WithLocation(18, 27));
+            analyzerFix.ExpectedDiagnostics.Add(new DiagnosticResult("ADEF001", Microsoft.CodeAnalysis.DiagnosticSeverity.Warning).WithLocation(18, 27));
 
-            await analyzerTest.RunAsync();
+            await analyzerFix.RunAsync();
         }
 
         [TestMethod]
@@ -131,14 +131,14 @@ namespace AlwaysDeveloping.CodeAnalysis.EntityFrameworkCore.Test
             string sourceCode = GenerateSourceCode(directiveCheck);
             string resultCode = GenerateSourceCode("DEBUG");
 
-            var analyzerTest = GenerateFixVerifierTest(sourceCode, resultCode, buildConfig);
+            var analyzerFix = GenerateFixVerifierTest(sourceCode, resultCode, buildConfig);
 
             // This tells test to just compare the text
-            analyzerTest.CodeActionValidationMode = CodeActionValidationMode.None;
+            analyzerFix.CodeActionValidationMode = CodeActionValidationMode.None;
 
-            analyzerTest.ExpectedDiagnostics.Add(new DiagnosticResult("ADEF001", Microsoft.CodeAnalysis.DiagnosticSeverity.Warning).WithLocation(18, 27));
+            analyzerFix.ExpectedDiagnostics.Add(new DiagnosticResult("ADEF001", Microsoft.CodeAnalysis.DiagnosticSeverity.Warning).WithLocation(18, 27));
 
-            await analyzerTest.RunAsync();
+            await analyzerFix.RunAsync();
         }
 
         [TestMethod]
@@ -149,9 +149,9 @@ namespace AlwaysDeveloping.CodeAnalysis.EntityFrameworkCore.Test
 
             string sourceCode = GenerateSourceCode(directiveCheck);
             string resultCode = GenerateSourceCode("DEBUG");
-            var analyzerTest = GenerateFixVerifierTest(sourceCode, resultCode, buildConfig);
+            var analyzerFix = GenerateFixVerifierTest(sourceCode, resultCode, buildConfig);
 
-            await analyzerTest.RunAsync();
+            await analyzerFix.RunAsync();
         }
 
         [TestMethod]
@@ -162,9 +162,9 @@ namespace AlwaysDeveloping.CodeAnalysis.EntityFrameworkCore.Test
 
             string sourceCode = GenerateSourceCode(directiveCheck);
             string resultCode = GenerateSourceCode("DEBUG");
-            var analyzerTest = GenerateAnalyzerTest(sourceCode, buildConfig);
+            var analyzerFix = GenerateFixVerifierTest(sourceCode, resultCode, buildConfig);
 
-            await analyzerTest.RunAsync();
+            await analyzerFix.RunAsync();
         }
 
         private static CSharpAnalyzerTest<DevOnlyMigrateAnalyzer, MSTestVerifier> GenerateAnalyzerTest(string sourceCode, string buildConfig, List<DiagnosticResult> expectedResults = null)
@@ -285,43 +285,5 @@ public class SampleContext : DbContext
     public DbSet<SampleEntity>? SampleEntity {{ get; set; }}
 }}";
         }
-
-        //    //    //Diagnostic and CodeFix both triggered and checked for
-        //    [TestMethod]
-        //    public async Task TestMethod2()
-        //    {
-        //        var test = @"
-        //using System;
-        //using System.Collections.Generic;
-        //using System.Linq;
-        //using System.Text;
-        //using System.Threading.Tasks;
-        //using System.Diagnostics;
-
-        //namespace ConsoleApplication1
-        //{
-        //    class {|#0:TypeName|}
-        //    {   
-        //    }
-        //}";
-
-        //        var fixtest = @"
-        //using System;
-        //using System.Collections.Generic;
-        //using System.Linq;
-        //using System.Text;
-        //using System.Threading.Tasks;
-        //using System.Diagnostics;
-
-        //namespace ConsoleApplication1
-        //{
-        //    class TYPENAME
-        //    {   
-        //    }
-        //}";
-
-        //        var expected = VerifyCS.Diagnostic("AlwaysDevelopingCodeAnalysisEntityFrameworkCore").WithLocation(0).WithArguments("TypeName");
-        //        await VerifyCS.VerifyCodeFixAsync(test, expected, fixtest);
-        //    }
     }
 }
